@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% block title %} Testing Symfony {% endblock %}
+
+{% block body%}
+<h1>Articles Names</h1>
+{% if articles %}
+<table class="table table-striped" id="article">
+    <thead>
+        <tr>
+            <th>Article Title</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for article in articles  %}
+        <tr>
+            <td>{{article.title}}</td>
+            <td>
+                <a href="{{baseURL}}article/{{article.id}}" class="btn btn-dark">Show</a>
+                <a href="{{baseURL}}article/edit/{{article.id}}" class="btn btn-primary">Edit</a>
+                <a href="#" data-id="{{article.id}}" class="btn btn-danger delete-article">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No Articles</p>
+{% endif %}
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{baseURL}}/js/main.js"></script>
+{% endblock %}
