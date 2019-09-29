@@ -14,8 +14,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 
-
-
 class ArticleController extends Controller
 {
 
@@ -27,8 +25,8 @@ class ArticleController extends Controller
     {
         //return new Response('<h1>here<h1>');
         $articles = $this->getDoctrine()->getRepository(Article::class)->findAll();
-        $baseUrl = '/symphart/public/';
-        return $this->render('articles/index.html.twig', array('articles' => $articles, 'baseURL' => $baseUrl));
+
+        return $this->render('articles/index.html.twig', array('articles' => $articles));
     }
 
     
