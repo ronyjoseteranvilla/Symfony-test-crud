@@ -5,7 +5,7 @@
              if(confirm('Are you sure')){
                  const id = e.target.getAttribute('data-id');
                 
-                 fetch(`http://localhost/symphart/public/article/delete/${id}`, {
+                 fetch(`/article/delete/${id}`, {
                      method: 'DELETE'
                  }).then(res => window.location.reload());
              }

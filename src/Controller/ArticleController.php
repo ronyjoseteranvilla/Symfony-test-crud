@@ -18,7 +18,7 @@ class ArticleController extends Controller
 {
 
     /**
-     * @Route("/", name="article_list")
+     * @Route("/", name="list_article")
      * @Method({"GET"})
      */
     public function index()
@@ -26,35 +26,35 @@ class ArticleController extends Controller
         //return new Response('<h1>here<h1>');
         $articles = $this->getDoctrine()->getRepository(Article::class)->findAll();
 
-        return $this->render('articles/index.html.twig', array('articles' => $articles));
+        return $this->render('articles/index.html.twig', ['articles' => $articles]);
     }
 
     
     /**
-     * @Route("/article/edit/{id}", name="article_edit")
+     * @Route("/article/edit/{id}", name="edit_article")
      * Method({GET, POST})
      */
     public function edit(Request $request, $id)
     {
         $article = $this->getDoctrine()->getRepository(Article::class)->find($id);
         $form = $this->createFormBuilder($article)
-            ->add('title', TextType::class, array(
-                'attr' => array(
+            ->add('title', TextType::class, [
+                'attr' => [
                     'class' => 'form-control'
-                )
-            ))
-            ->add('body', TextareaType::class, array(
+                    ]
+                    ])
+            ->add('body', TextareaType::class, [
                 'required' => false,
-                'attr' => array(
+                'attr' => [
                     'class' => 'form-control'
-                )
-            ))
-            ->add('save', SubmitType::class, array(
+                    ]
+                    ])
+            ->add('save', SubmitType::class, [
                 'label' => 'Edit',
-                'attr' => array(
+                'attr' => [
                     'class' => 'btn btn-primary mt-3'
-                )
-            ))
+                    ]
+                    ])
             ->getForm();
 
         $form->handleRequest($request);
@@ -65,39 +65,39 @@ class ArticleController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
 
-            return $this->redirectToRoute('article_list');
+            return $this->redirectToRoute('list_article');
         }
 
-        return $this->render('articles/edit.html.twig', array(
+        return $this->render('articles/edit.html.twig', [
             'form' => $form->createView()
-        ));
+            ]);
     }
 
     /**
-     * @Route("/article/new", name="article_new")
+     * @Route("/article/new", name="new_article")
      * Method({GET, POST})
      */
     public function new(Request $request)
     {
         $article = new Article();
         $form = $this->createFormBuilder($article)
-            ->add('title', TextType::class, array(
-                'attr' => array(
+            ->add('title', TextType::class, [
+                'attr' => [
                     'class' => 'form-control'
-                )
-            ))
-            ->add('body', TextareaType::class, array(
+                    ]
+                    ])
+            ->add('body', TextareaType::class, [
                 'required' => false,
-                'attr' => array(
+                'attr' => [
                     'class' => 'form-control'
-                )
-            ))
-            ->add('save', SubmitType::class, array(
+                    ]
+                    ])
+            ->add('save', SubmitType::class, [
                 'label' => 'Create',
-                'attr' => array(
+                'attr' => [
                     'class' => 'btn btn-primary mt-3'
-                )
-            ))
+                    ]
+                    ])
             ->getForm();
 
         $form->handleRequest($request);
@@ -109,12 +109,12 @@ class ArticleController extends Controller
             $entityManager->persist($article);
             $entityManager->flush();
 
-            return $this->redirectToRoute('article_list');
+            return $this->redirectToRoute('list_article');
         }
 
-        return $this->render('articles/new.html.twig', array(
+        return $this->render('articles/new.html.twig', [
             'form' => $form->createView()
-        ));
+            ]);
     }
 
     /**
@@ -134,12 +134,13 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/article/{id}")
+     * @Route("/article/{id}", name="show_article")
+     * @Method({"GET"})
      */
     public function show($id)
     {
         $article = $this->getDoctrine()->getRepository(Article::class)->find($id);
-        return $this->render('articles/show.html.twig', array('article' => $article));
+        return $this->render('articles/show.html.twig', ['article' => $article]);
     }
 
 

@@ -16,8 +16,8 @@
         <tr>
             <td>{{article.title}}</td>
             <td>
-                <a href="/article/{{article.id}}" class="btn btn-dark">Show</a>
-                <a href="/article/edit/{{article.id}}" class="btn btn-primary">Edit</a>
+                <a href="{{ path('show_article', {id:article.id}) }}" class="btn btn-dark">Show</a>
+                <a href=" {{ path('edit_article', {id: article.id }) }}" class="btn btn-primary">Edit</a>
                 <a href="#" data-id="{{article.id}}" class="btn btn-danger delete-article">Delete</a>
             </td>
         </tr>
