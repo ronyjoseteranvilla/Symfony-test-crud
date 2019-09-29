@@ -7,19 +7,18 @@ use App\Entity\Article;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 
+// i can do a main route like Route("/article", name"article.") it's just going to add all the names of the routes with a ., it just looks cooler
 class ArticleController extends Controller
 {
 
     /**
-     * @Route("/", name="list_article")
-     * @Method({"GET"})
+     * @Route("/", name="list_article", methods={"GET"})
      */
     public function index()
     {
@@ -31,8 +30,7 @@ class ArticleController extends Controller
 
     
     /**
-     * @Route("/article/edit/{id}", name="edit_article")
-     * Method({GET, POST})
+     * @Route("/article/edit/{id}", name="edit_article", methods={"GET","POST"})
      */
     public function edit(Request $request, $id)
     {
@@ -74,8 +72,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/article/new", name="new_article")
-     * Method({GET, POST})
+     * @Route("/article/new", name="new_article", methods={"GET","POST"})
      */
     public function new(Request $request)
     {
@@ -118,8 +115,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/article/delete/{id}")
-     * @Method({"DELETE"})
+     * @Route("/article/delete/{id}", methods={"DELETE"})
      */
     public function delete(Request $request, $id)
     {
@@ -134,8 +130,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/article/{id}", name="show_article")
-     * @Method({"GET"})
+     * @Route("/article/{id}", name="show_article", methods={"GET"})
      */
     public function show($id)
     {
