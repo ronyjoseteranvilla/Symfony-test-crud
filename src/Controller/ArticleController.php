@@ -32,7 +32,7 @@ class ArticleController extends Controller
     /**
      * @Route("/article/edit/{id}", name="edit_article", methods={"GET","POST"})
      */
-    public function edit(Request $request, $id)
+    public function edit(Request $request, Article $id)
     {
         $article = $this->getDoctrine()->getRepository(Article::class)->find($id);
         $form = $this->createFormBuilder($article)
@@ -117,7 +117,7 @@ class ArticleController extends Controller
     /**
      * @Route("/article/delete/{id}", methods={"DELETE"})
      */
-    public function delete(Request $request, $id)
+    public function delete(Request $request, Article $id)
     {
         $article = $this->getDoctrine()->getRepository(Article::class)->find($id);
 
@@ -132,7 +132,7 @@ class ArticleController extends Controller
     /**
      * @Route("/article/{id}", name="show_article", methods={"GET"})
      */
-    public function show($id)
+    public function show(Article $id)
     {
         $article = $this->getDoctrine()->getRepository(Article::class)->find($id);
         return $this->render('articles/show.html.twig', ['article' => $article]);
